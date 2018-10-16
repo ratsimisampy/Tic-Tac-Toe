@@ -13,12 +13,17 @@ class Game
     init_boardcase
   end
 
-  def init_player
-    puts "Player1, what's your name ?:"
+  def prompt_user
+    print "Bonjour joueur 1, merci de saisir ton prénom:"
     @name1 = gets.chomp 
-    puts "Player2, what's your name ?:"
+    puts
+    print "Bonjour joueur 2, merci de saisir ton prénom:"
     @name2 = gets.chomp
+    puts
+  end
 
+  def init_player
+    prompt_user
     @player1 = Player.new   
     @player1.name = @name1
     @player1.piece = "X"
@@ -34,7 +39,7 @@ class Game
   end
 
   def init_boardcase
-    #instancie les 9 cases
+    #instancie les 9 cases /Peut mieux faire!!!/
 
     case1 = BoardCase.new #(true, "", 1)
     case1.position = 1
@@ -72,42 +77,50 @@ class Game
       
       case @jeton 
         when 1 # Le joueur 1 joue
-          print "#{@player1.name.capitalize} à vous de jouer. Choisissez votre case (entre 1 à 9) svp: " 
+          print "#{@player1.name.capitalize} à toi de jouer. Choisis ta case (entre 1 à 9) stp: " 
           
           @position = gets.chomp.to_i
           @my_board.play(@player1.piece,@position) 
-          if @my_board.victory? 
+          if @my_board.has_win(@player1.piece)
             #on change le statut du joueur à "gagnant"
             @player1.is_winner = true 
             #Le jeu s'arrete
             @b_start = false
-            
+            stop(@player1.name)
+            @my_board.display
             break
           end
-            #le jeu continue et on passe le tour
-            puts "Apres le if"
+            #Autrement le jeu continue et on passe le tour
+            
           @jeton = 2
         when 2 # Le joueur 2 joue
-          print "#{@player2.name.capitalize} à vous de jouer. Choisissez votre case (entre 1 à 9) svp: "   
+          print "#{@player2.name.capitalize} à vous de jouer. Choisis ta case (entre 1 à 9) stp: "   
           
           @position = gets.chomp.to_i
           @my_board.play(@player2.piece,@position) 
-          if @my_board.victory? 
+          if @my_board.has_win(@player2.piece) 
             #on change le statut du joueur à "gagnant"
             @player2.is_winner = true 
             #Le jeu s'arrete
             @b_start = false
+            stop(@player1.name)
+            @my_board.display
             break
           end
-            #le jeu continue et on passe le tour
-
+            #Autrement le jeu continue et on passe le tour
           @jeton = 1
       end
       #apres avoir joue, on display
           @my_board.display
-        
+      i += 1   
     end
-    i += 1
+    
   end
 
+  #recupere le nom du joueur gagnant  
+  def stop(winner)
+    if winner
+      puts "#{winner} a gagné la partie!"
+    end 
+  end
 end
