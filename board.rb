@@ -1,6 +1,7 @@
 class Board
 	attr_accessor :board
 	include Enumerable
+	@@msg_output = "my output message"
 
 def initialize
 	@board = []
@@ -17,39 +18,47 @@ end
 
 def display
 
-	puts "|====================================== Welcome to  ================================================|"
+	puts "|====================================== Bienvenu sur  ================================================|"
 	puts "|=============================== Tic Tac Toe Game World Tour =======================================|"
-	puts
-	puts
-	puts "					 #{@board[0]} | #{@board[1]} | #{@board[2]} 								"
-	puts "					-----------																	"
-    puts "					 #{@board[3]} | #{@board[4]} | #{@board[5]} 								"
-    puts "					-----------																	"
-	puts "					 #{@board[6]} | #{@board[7]} | #{@board[8]} 								"
+	puts 
+	puts " 								Voici les indices de positionnement :"
+	puts																			
+	puts "					 #{@board[0]} | #{@board[1]} | #{@board[2]} 			 1 | 2 | 3					"
+	puts "					-----------			-----------					"
+    puts "					 #{@board[3]} | #{@board[4]} | #{@board[5]} 			 4 | 5 | 6					"
+    puts "					-----------			-----------					"
+	puts "					 #{@board[6]} | #{@board[7]} | #{@board[8]} 			 7 | 8 | 9					"
 	puts "																								"
 	puts "																								"
 	puts "|===================================================================================================|"
 	puts
 end
 
-def play(ma_piece,ma_position)
+def play(player_symbol,my_position)
 
-	@board[ma_position.to_i - 1] = ma_piece
+	@board[my_position.to_i - 1] = player_symbol
 
 end
 
-def victory?
+def has_win(symbol)
 	@win_status = false
-	if (@board[0] == @board[1] && @board[0] == @board[2]) 
-		|| (@board[3] == @board[4]&& @board[3] == @board[5]) 
-		|| (@board[7] == @board[8] && @board[7] == @board[9]) 
-		|| (@board[0] == @board[4] && @board[0] == @board[8]) 
-		|| (@board[6] == @board [4] && @board[6] == @board[2]) 
-		|| (@board[0] == @board[3] && @board[0] == @board[6]) 
-		|| (@board[1] == @board[4] && @board[1] == @board[7]) 
-		|| (@board[2] == @board[5] && @board[2] == @board[8])
-	@win_status = true
+	
+	#verifie si "symboles" alignés
+	if (( @board[0] == symbol && @board[1] == symbol && @board[2] == symbol ) || (@board[3] == symbol && @board[4] == symbol && @board[5] == symbol ) || (@board[6] == symbol && @board[7] == symbol && @board[8] == symbol ) )
+		@win_status = true
+		@Msg_output = "Combinaison de '#{symbol}' gagnant sur une ligne"
 	end
+	#verifie si "symboles" alignés en colonne
+	if ( (@board[0] == symbol && @board[3] == symbol && @board[6] == symbol) || (@board[1] == symbol && @board[4] == symbol && @board[7] == symbol) || (@board[2] == symbol && @board[5] == symbol && @board[8] == symbol ) )
+		@win_status = true
+		@Msg_output = "Combinaison de '#{symbol}' gagnant sur une colonne"
+	end
+	#verifie si "symboles" en alignés en diagonale
+	if ( (@board[0] == symbol && @board[4] == symbol && @board[8] == symbol) || (@board[6] == symbol && @board[4] == symbol && @board[2] == symbol ) )
+		@win_status = true
+		@@Msg_output = "Combinaison de '#{symbol}' gagnant sur une diagonale"
+	end
+
 	return @win_status
 end
 
