@@ -11,6 +11,15 @@ Team building. En mode pair programming alterné avec @Tomrouneg / @Kalisp / @Ma
 
 Un Terminal; pas de Gemfile nécessaire.
 
+
+### Instalation
+
+- Cloner le Repo dans son repoertoire local
+- puis lancer la commande suivante via votre Terminal ...
+
 ```
-Give examples
+$ ruby ttt.rb
 ```
+### Ecran du jeu
+
+![Recordit GIF](http://g.recordit.co/iLN6A0vSD8.gif)
