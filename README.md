@@ -22,4 +22,4 @@ $ ruby ttt.rb
 ```
 ### Ecran du jeu
 
-![Recordit GIF](http://g.recordit.co/iLN6A0vSD8.gif)
+Comment faire un screenshot >>ici<<?
