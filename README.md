@@ -5,7 +5,7 @@ Le jeu du fameux morpion
 
 ## Contributeurs
 
-Team building. En mode pair programming alterné avec @Tomrouneg / @Kalisp / @Mathieu M
+Team building. En mode pair programming avec @Tomrouneg / @Kalisp / @Mathieu M
 
 ### Prerequisites
 
